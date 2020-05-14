@@ -26,6 +26,14 @@ public final class Rotation {
 	}
 	
 	@Override
+	public boolean equals(Object other) {
+		return other.getClass() == this.getClass() && 
+				Math.abs(((Rotation)other).getX() - (this.getX())) < .01 &&  
+				Math.abs(((Rotation)other).getY() - (this.getY())) < .01 && 
+				Math.abs(((Rotation)other).getZ() - (this.getZ())) < .01;
+	}
+	
+	@Override
 	public String toString() {
 		return "(" + this.x + ", " + this.y + ", " + this.z + ")";
 	}

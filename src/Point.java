@@ -1,4 +1,3 @@
-import java.util.Objects;
 
 // Immutable point class to represent a point in 3D space
 public final class Point {
@@ -10,7 +9,7 @@ public final class Point {
 		this.z = z;
 	}
 	
-	// Rotates the point theta radians about the x axis
+	// Rotates the point theta radians about the z axis
 	public Point rotateZ(double theta) {
 		double cos = Math.cos(theta);
 		double sin = Math.sin(theta);
@@ -28,13 +27,13 @@ public final class Point {
 		return new Point(newx, this.y, newz);
 	}
 	
-	// Rotates the point theta radians about the z axis
+	// Rotates the point theta radians about the x axis
 	public Point rotateX(double theta) {
 		double cos = Math.cos(theta);
 		double sin = Math.sin(theta);
 		double newy = this.y*cos - this.z*sin;
 		double newz = this.y*sin + this.z*cos;
-		return new Point(this.z, newy, newz);
+		return new Point(this.x, newy, newz);
 	}
 	
 	// Rotates the point according to the given rotation
@@ -64,5 +63,10 @@ public final class Point {
 	@Override
 	public int hashCode() {
 		return java.util.Arrays.deepHashCode(new Object[] {this.x, this.y, this.z});
+	}
+	
+	@Override
+	public String toString() {
+		return "(" + this.x + ", " + this.y + ", " + this.z + ")";
 	}
 }

@@ -14,14 +14,11 @@ public final class PointPair {
 		return this.p2;
 	}
 	
-	public Translation getTranslation() {
-		return new Translation(this.p2.getX() - this.p1.getX(), this.p2.getY() - this.p1.getY(), this.p2.getZ() - this.p1.getZ());
-	}
-	
 	public Translation getTranslation(double granularity) {
 		return new Translation(round(this.p2.getX() - this.p1.getX(), granularity), 
 				round(this.p2.getY() - this.p1.getY(), granularity), 
-				round(this.p2.getZ() - this.p1.getZ(), granularity));
+				round(this.p2.getZ() - this.p1.getZ(), granularity), 
+				granularity);
 	}
 	
 	public static double round(double value, double granularity) {
@@ -33,6 +30,11 @@ public final class PointPair {
 	@Override
 	public int hashCode() {
 		return java.util.Arrays.deepHashCode(new Object[] {this.p1, this.p2});
+	}
+	
+	@Override
+	public String toString() {
+		return "( " + this.p1.toString() + " , " + this.p2.toString() + " )";
 	}
 
 }

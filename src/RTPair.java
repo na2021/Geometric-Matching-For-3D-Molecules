@@ -22,6 +22,13 @@ public final class RTPair {
 	}
 	
 	@Override
+	public boolean equals(Object other) {
+		return other.getClass() == this.getClass() && 
+				((RTPair)other).getRotation().equals(this.getRotation()) &&  
+				((RTPair)other).getTranslation().equals(this.getTranslation());
+	}
+	
+	@Override
 	public String toString() {
 		return "Rotation: " + r.toString() + ", Translation: " + t.toString();
 	}

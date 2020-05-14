@@ -17,6 +17,7 @@ public class Match {
 		Set<Point> set2 = new ReadingSet(filename2).getPoints();
 		PointSet A = new PointSet(set1);
 		PointSet B = new PointSet(set2);
+		System.out.println("Files read into point sets...");
 		int sectors = Integer.parseInt(sectorString);
 		double granularity = Double.parseDouble(granularityString);
 		int threshold = Integer.parseInt(thresholdString);
@@ -24,15 +25,20 @@ public class Match {
 		Map<RTPair, Integer> filteredResults = filterByOccurance(results, threshold);
 		Iterator<RTPair> RTIterator = filteredResults.keySet().iterator();
 		System.out.println("Results: ");
+		int max = 0;
 		while(RTIterator.hasNext()) {
 			RTPair rt = RTIterator.next();
+			int freq = filteredResults.get(rt);
+			if (freq > max) max = freq;
 			System.out.println(rt.toString() + " : " + filteredResults.get(rt));
 		}
+		System.out.println("max: " + max);
 	}
 
 	public static Map<RTPair, Integer> match(PointSet A, PointSet B, int sectors, double granularity) {
 		Map<RTPair, Integer> occuranceMap = new HashMap<RTPair, Integer>();
 		Set<Rotation> rotations = generateRotations(sectors);
+		System.out.println("Rotations Generated...");
 		Iterator<Rotation> iterRot = rotations.iterator();
 		while(iterRot.hasNext()) {
 			Rotation curR = iterRot.next();
@@ -70,7 +76,7 @@ public class Match {
 	}
 	
 	public static Translation generateTranslation(double x, double y, double z, double granularity) {
-		return new Translation(round(x, granularity), round(y, granularity), round(z, granularity));
+		return new Translation(round(x, granularity), round(y, granularity), round(z, granularity), granularity);
 	}
 	
 	// TODO finish
